@@ -1,2 +1,3 @@
 venv/*
-db.*
+db.
+andy_blog/settings/production.py
