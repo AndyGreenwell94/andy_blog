@@ -7,7 +7,9 @@ from django.db import models
 
 
 class BlogIndexPage(Page):
+
     intro = RichTextField(blank=True)
+    image = models.ImageField(blank=True)
 
     content_panels = Page.content_panels + [
         FieldPanel('intro', classname="full")
@@ -16,15 +18,18 @@ class BlogIndexPage(Page):
 
 class BlogPage(Page):
     date = models.DateField("Post date")
-    intro = models.CharField(max_length=250)
+    intro = models.CharField(max_length=1000)
     body = RichTextField(blank=True)
 
     search_fields = Page.search_fields + [
+        index.SearchField('title'),
         index.SearchField('intro'),
         index.SearchField('body'),
     ]
 
     content_panels = Page.content_panels + [
+        FieldPanel('title'),
+        FieldPanel('intro', classname="full"),
+        FieldPanel('body', classname="full"),
         FieldPanel('date'),
-        FieldPanel('intro'),
     ]
